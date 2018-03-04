@@ -1,0 +1,56 @@
+<div class="log-out">
+  <button (click)="logOut()" class="btn btn-default">
+    <i class="fas fa-sign-out-alt"></i>
+    LogOut
+  </button>
+</div>
+<div class="container">
+  <div>
+    <div class="row add-row">
+      <div class="col-lg-6 col-md-7 col-md-10">
+        <button class="btn btn-success" type="button" (click)="add()">
+          Add
+        </button>
+      </div>
+    </div>
+    <table class="table table-striped table-bordered table-hover">
+      <thead>
+      <tr>
+        <th [class.active]="order === 'id'"
+            (click)="setOrder('id')">
+          Id
+          <span [hidden]="reverse">▼</span>
+          <span [hidden]="!reverse">▲</span>
+        </th>
+        <th [class.active]="order === 'text'"
+            (click)="setOrder('text')">
+          Text
+          <span [hidden]="reverse">▼</span>
+          <span [hidden]="!reverse">▲</span>
+        </th>
+        <th [class.active]="order === 'status'"
+            (click)="setOrder('status')">
+          Status
+          <span [hidden]="reverse">▼</span>
+          <span [hidden]="!reverse">▲</span>
+        </th>
+        <th >
+          Action
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let todo of todos | orderBy: order:reverse:'case-insensitive'">
+        <td>{{ todo.id }}</td>
+        <td>{{ todo.text }}</td>
+        <td>{{ todo.status }}</td>
+        <td>
+          <button class="btn btn-sm colum-action" type="button" (click)="delItem(todo)">
+            del
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
