@@ -12,6 +12,7 @@ const routes: Routes = [
     { path: '', redirectTo: '/list', pathMatch: 'full' },
     { path: 'login', component: LoginComponent },
     { path: 'edit/:id', component: EditComponent },
+    { path: 'create', component: EditComponent },
     { path: 'list', component: ListComponent, canActivate: [MyGuardGuard] },
     { path: '**', component: NotFoundComponent }
 ];

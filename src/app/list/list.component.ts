@@ -31,7 +31,6 @@ export class ListComponent implements OnInit {
   ngOnInit() {
       this.loading = true;
       this._service.getList().subscribe(res => {
-          console.log(res);
           this.loading = false;
           this.todos = res as Todo[];
       }, err => {
@@ -54,6 +53,7 @@ export class ListComponent implements OnInit {
     }
     add() {
         console.log('Add');
+        this.router.navigate(['/create']);
     }
 
     delItem(item: any) {

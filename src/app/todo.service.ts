@@ -17,6 +17,6 @@ export class TodoService {
                 let todos: any = resp;
                 return todos;
             });
-             // .catch((error: any) => Observable.throw(error.json()));
+        //.catch((error: any) => Observable.throw(error.json()));
     }
 }
