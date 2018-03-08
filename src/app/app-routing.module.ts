@@ -7,12 +7,14 @@ import { ListComponent } from './list/list.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { EditComponent } from './edit/edit.component';
 import { MyGuardGuard } from './my-guard.guard';
+import { RegistrationComponent } from './registration/registration.component';
 
 const routes: Routes = [
     { path: '', redirectTo: '/list', pathMatch: 'full' },
     { path: 'login', component: LoginComponent },
-    { path: 'edit/:id', component: EditComponent },
-    { path: 'create', component: EditComponent },
+    { path: 'registration', component: RegistrationComponent },
+    { path: 'edit/:id', component: EditComponent, canActivate: [MyGuardGuard] },
+    { path: 'create', component: EditComponent, canActivate: [MyGuardGuard]},
     { path: 'list', component: ListComponent, canActivate: [MyGuardGuard] },
     { path: '**', component: NotFoundComponent }
 ];

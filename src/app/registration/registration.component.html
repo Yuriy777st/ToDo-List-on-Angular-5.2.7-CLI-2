@@ -1,0 +1,44 @@
+<div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3">
+  <ngb-alert type='info' [dismissible]="false">
+    Registration !!!
+  </ngb-alert>
+  <form name="form" #regForm="ngForm" novalidate>
+    <div class="form-group"
+         [class.has-error]="(regForm.submitted && !username.valid) || (username.dirty && !username.valid)">
+      <label for="username">Login</label>
+      <input type="text" class="form-control" id="username" name="username"
+             [(ngModel)]="user.username" #username="ngModel" required />
+      <div *ngIf="(regForm.submitted && !username.valid) || (username.dirty && !username.valid)"
+           class="help-block">Login is required</div>
+    </div>
+    
+    <div class="form-group"
+         [class.has-error]="(regForm.submitted && !password.valid) || (password.dirty && !password.valid)">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" id="password" name="password"
+             [(ngModel)]="user.password" #password="ngModel" required />
+      <div *ngIf="(regForm.submitted && !password.valid) || (password.dirty && !password.valid)"
+           class="help-block">Password is required</div>
+    </div>
+  
+    <div class="form-group"
+         [class.has-error]="(regForm.submitted && !confirmpassword.valid) || (confirmpassword.dirty && !confirmpassword.valid)">
+      <label for="confirmpassword">Confirm password</label>
+      <input type="password" class="form-control" id="confirmpassword" name="confirmpassword"
+             [(ngModel)]="user.confirmPassword" #confirmpassword="ngModel" required />
+      <div *ngIf="(regForm.submitted && !password.valid) || (password.dirty && !password.valid)"
+           class="help-block">Password is required</div>
+    </div>
+  
+    <div class="form-group">
+      <button (click) = save()
+              class="btn btn-success">
+        Registration
+      </button>
+      <button class="btn btn-danger" routerLink="/login" >
+        Cancel
+      </button>
+    </div>
+    <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+  </form>
+</div>

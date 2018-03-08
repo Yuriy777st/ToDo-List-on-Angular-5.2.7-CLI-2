@@ -14,6 +14,7 @@ import { EditComponent } from './edit/edit.component';
 import { MyGuardGuard } from './my-guard.guard';
 import { AuthenticationService } from './authentication-service.service';
 import { TodoService } from './todo.service';
+import { RegistrationComponent } from './registration/registration.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { TodoService } from './todo.service';
     LoginComponent,
     ListComponent,
     NotFoundComponent,
-    EditComponent
+    EditComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,

@@ -2,7 +2,7 @@
     <ngb-alert type='info' [dismissible]="false">
       Please log in !!!
     </ngb-alert>
-  <form name="form" (ngSubmit)="loginForm.form.valid && login()" #loginForm="ngForm" novalidate>
+  <form name="form"  #loginForm="ngForm" novalidate>
     <div class="form-group"
          [class.has-error]="(loginForm.submitted && !username.valid) || (username.dirty && !username.valid)">
       <label for="username">Login</label>
@@ -20,9 +20,15 @@
       <div *ngIf="(loginForm.submitted && !password.valid) || (password.dirty && !password.valid)"
            class="help-block">Password is required</div>
     </div>
-    
+  
     <div class="form-group">
-      <button [disabled]="loading" class="btn btn-primary">Login</button>
+      <button [disabled]="loading" (click) = login()
+              class="btn btn-success">
+        Login
+      </button>
+      <button class="btn btn-danger" routerLink="/registration" >
+        Registration
+      </button>
     </div>
     <div *ngIf="error" class="alert alert-danger">{{error}}</div>
   </form>
