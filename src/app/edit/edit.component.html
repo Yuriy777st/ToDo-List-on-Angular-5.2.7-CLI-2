@@ -2,7 +2,7 @@
   <ngb-alert type='info' [dismissible]="false">
     {{greetingsText}}
   </ngb-alert>
-  <form name="form" (ngSubmit)="editForm.form.valid && save()" #editForm="ngForm" novalidate>
+  <form *ngIf="!loading" name="form" #editForm="ngForm" novalidate>
     <div class="form-group todo-edit"
          [class.has-error]="text.dirty && !text.valid">
       <label class="control-label col-lg-2">Text<span class="star">*</span></label>
@@ -29,7 +29,13 @@
     
     
     <div class="form-group">
-      <button [disabled]="loading" class="btn btn-primary">Add</button>
+      <button [disabled]="loading" (click) = save()
+              class="btn btn-success">
+        Add
+      </button>
+      <button class="btn btn-danger" routerLink="/list" >
+        Cancel
+      </button>
     </div>
     <ngb-alert *ngIf="errors" type='danger' [dismissible]="false">
       {{errors}}

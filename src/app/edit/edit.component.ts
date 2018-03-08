@@ -14,6 +14,7 @@ export class EditComponent implements OnInit {
   loading = false;
   greetingsText = '';
   errors: any;
+  id: number;
 
   constructor(private _service: TodoService,
               private route: ActivatedRoute,
@@ -22,9 +23,18 @@ export class EditComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      let id = parseInt(params['id'], 10);
-      if (id) {
+      this.id = parseInt(params['id'], 10);
+      if (this.id) {
         this.greetingsText = 'Edit item';
+          this._service.getById(this.id)
+              .then((res) => {
+                  this.todo = res as Todo;
+                  this.loading = false;
+              })
+              .catch(err => {
+                  this.errors = err;
+                  this.loading = false;
+              });
       } else {
         this.todo = new Todo('', 'new');
         this.greetingsText = 'Create item';
@@ -33,15 +43,27 @@ export class EditComponent implements OnInit {
   }
 
   save() {
-      this._service.save(this.todo)
-          .then(() => {
-              this.loading = false;
-              this.router.navigate(['/list']);
-          })
-          .catch(err => {
-            console.log('error', err);
-              this.loading = false;
-              this.errors = err;
-          });
+    if (this.id) {
+        this._service.edit(this.todo)
+            .then(() => {
+                this.loading = false;
+                this.router.navigate(['/list']);
+            })
+            .catch(err => {
+                this.errors = err;
+                this.loading = false;
+            });
+    } else {
+        this._service.save(this.todo)
+            .then(() => {
+                this.loading = false;
+                this.router.navigate(['/list']);
+            })
+            .catch(err => {
+                console.log('error', err);
+                this.errors = err;
+                this.loading = false;
+            });
+    }
   }
 }

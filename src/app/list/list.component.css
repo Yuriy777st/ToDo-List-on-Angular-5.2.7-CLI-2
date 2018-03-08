@@ -3,6 +3,7 @@
 }
 .colum-action {
     float: right;
+    margin-right: 5px;
 }
 .add-row {
     margin-bottom: 10px;

@@ -1,6 +1,6 @@
 <div class="log-out">
   <button (click)="logOut()" class="btn btn-default">
-    <i class="fas fa-sign-out-alt"></i>
+    <i class="fa fa-sign-out" aria-hidden="true"></i>
     LogOut
   </button>
 </div>
@@ -9,7 +9,7 @@
     <div class="row add-row">
       <div class="col-lg-6 col-md-7 col-md-10">
         <button class="btn btn-success" type="button" (click)="add()">
-          Add
+          <i class="fa fa-plus" aria-hidden="true"></i>
         </button>
       </div>
     </div>
@@ -45,8 +45,17 @@
         <td>{{ todo.text }}</td>
         <td>{{ todo.status }}</td>
         <td>
-          <button class="btn btn-sm colum-action" type="button" (click)="delItem(todo)">
-            del
+          <button class="btn btn-sm colum-action"
+                  placement="top" ngbTooltip="Delete item"
+                  type="button" (click)="delItem(todo)">
+            <i class="fa fa-trash text-danger"></i>
+          </button>
+  
+          <button class="btn btn-sm colum-action"
+                  placement="top" ngbTooltip="Edit item"
+                  [routerLink]="['/edit/'+todo.id]"
+                  type="button">
+            <i class="fa fa-pencil"></i>
           </button>
         </td>
       </tr>
