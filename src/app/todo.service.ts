@@ -23,4 +23,7 @@ export class TodoService extends AbstractService {
     public getById(id: number) {
         return this.get(_API + '/' + id);
     }
+    public remove(id: number) {
+        return this.delete(_API + '/' + id);
+    }
 }

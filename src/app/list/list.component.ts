@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { OrderPipe } from 'ngx-order-pipe';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 import { AuthenticationService} from '../authentication-service.service';
 import { TodoService } from '../todo.service';
@@ -18,12 +19,14 @@ export class ListComponent implements OnInit {
     todos: Todo[] = [];
     loading = false;
     errors: any;
+    closeResult: string;
 
   constructor(
       private router: Router,
       private _service: TodoService,
       private authenticationService: AuthenticationService,
-      private orderPipe: OrderPipe
+      private orderPipe: OrderPipe,
+      private modalService: NgbModal
   ) {
       this.sortedCollection = orderPipe.transform(this.collection, 'info.name');
       console.log(this.sortedCollection);
@@ -31,14 +34,11 @@ export class ListComponent implements OnInit {
 
   ngOnInit() {
       this.loading = true;
-      // this._service.getList().subscribe(res => {
-      //     this.loading = false;
-      //     this.todos = res as Todo[];
-      // }, err => {
-      //     console.log(err);
-      //     this.loading = false;
-      // });
       this.errors = null;
+      this._loadList();
+  }
+
+  private _loadList() {
       this._service.getList().then(res => {
           this.todos = res as Todo[];
           this.loading = false;
@@ -65,7 +65,28 @@ export class ListComponent implements OnInit {
         this.router.navigate(['/create']);
     }
 
-    delItem(item: any) {
-      console.log('Delete');
+    open(content: any, id: number) {
+        this.modalService.open(content).result.then((result) => {
+            this.loading = true;
+            this._service.remove(id).then( () => {
+                this._loadList();
+            })
+                .catch(err => {
+                    this.loading = false;
+                    this.errors = err.error;
+                });
+        }, (reason) => {
+        });
+    }
+
+    private getDismissReason(reason: any): string {
+        if (reason === ModalDismissReasons.ESC) {
+            return 'by pressing ESC';
+        } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+            return 'by clicking on a backdrop';
+        } else {
+            return  `with: ${reason}`;
+        }
     }
 }
+

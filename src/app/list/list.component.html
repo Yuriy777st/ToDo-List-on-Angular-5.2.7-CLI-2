@@ -47,10 +47,11 @@
         <td>
           <button class="btn btn-sm colum-action"
                   placement="top" ngbTooltip="Delete item"
-                  type="button" (click)="delItem(todo)">
+                  (click)="open(confirm, todo.id)"
+                  type="button">
             <i class="fa fa-trash text-danger"></i>
           </button>
-  
+          <!--(click)="delItem(todo)"-->
           <button class="btn btn-sm colum-action"
                   placement="top" ngbTooltip="Edit item"
                   [routerLink]="['/edit/'+todo.id]"
@@ -63,3 +64,19 @@
     </table>
   </div>
 </div>
+
+<ng-template #confirm let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Confirm delete</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d(false)">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Delete?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c(true)">Yes</button>
+    <button type="button" class="btn btn-outline-dark" (click)="d(false)">No</button>
+  </div>
+</ng-template>
