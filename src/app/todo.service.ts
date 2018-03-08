@@ -1,22 +1,18 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import { AbstractService } from './base/abstract.service';
+import { Todo } from './todo';
 import 'rxjs/add/operator/map';
 
-const _API = 'http://localhost:3000';
+const _API = 'http://localhost:3000/todos';
 
 @Injectable()
-export class TodoService {
+export class TodoService extends AbstractService {
 
-  constructor(private http: HttpClient) { }
+    public getList() {
+        return this.get(_API);
+    }
 
-    getList(): Observable<any[]>{
-        return this.http
-            .get(_API + '/todos')
-            .map((resp) => {
-                let todos: any = resp;
-                return todos;
-            });
-        //.catch((error: any) => Observable.throw(error.json()));
+    public save(record: Todo) {
+        return this.post(_API, JSON.stringify(record));
     }
 }

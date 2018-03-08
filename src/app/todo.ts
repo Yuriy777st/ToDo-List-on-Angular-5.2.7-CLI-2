@@ -3,8 +3,8 @@ export class Todo {
     text: string;
     status: string;
 
-    constructor(id: number, text: string, status: string) {
-        this.id = id;
+    constructor(text: string, status: string, id?: number) {
+        this.id = id ? id : null;
         this.text = text;
         this.status = status;
     }

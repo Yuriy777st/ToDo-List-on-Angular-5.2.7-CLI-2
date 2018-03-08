@@ -12,7 +12,9 @@ import { Todo } from '../todo';
 export class EditComponent implements OnInit {
   todo: Todo;
   loading = false;
-  greetingsText: string = '';
+  greetingsText = '';
+  errors: any;
+
   constructor(private _service: TodoService,
               private route: ActivatedRoute,
               protected router: Router) {
@@ -20,22 +22,26 @@ export class EditComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      var id = parseInt(params['id'], 10);
+      let id = parseInt(params['id'], 10);
       if (id) {
         this.greetingsText = 'Edit item';
       } else {
-        this.todo = Todo(0, '', 'new');
-        console.log('create**', this.todo);
-        this._service.getList().subscribe(res => {
-          this.loading = false;
-          this.todo.id = res.length;
-        }, err => {
-          console.log(err);
-          this.loading = false;
-        });
+        this.todo = new Todo('', 'new');
         this.greetingsText = 'Create item';
       }
     });
   }
 
+  save() {
+      this._service.save(this.todo)
+          .then(() => {
+              this.loading = false;
+              this.router.navigate(['/list']);
+          })
+          .catch(err => {
+            console.log('error', err);
+              this.loading = false;
+              this.errors = err;
+          });
+  }
 }

@@ -2,33 +2,38 @@
   <ngb-alert type='info' [dismissible]="false">
     {{greetingsText}}
   </ngb-alert>
-  <form name="form" (ngSubmit)="editForm.form.valid && login()" #editForm="ngForm" novalidate>
-    <div class="form-group"
-         [class.has-error]="!text.valid || (text.dirty && !text.valid)">
+  <form name="form" (ngSubmit)="editForm.form.valid && save()" #editForm="ngForm" novalidate>
+    <div class="form-group todo-edit"
+         [class.has-error]="text.dirty && !text.valid">
       <label class="control-label col-lg-2">Text<span class="star">*</span></label>
       <div class="controls col-lg-10">
         <input type="text" class="form-control" id="text" name="text"
                [(ngModel)]="todo.text" #text="ngModel" required />
-        <div *ngIf="(editForm.submitted && !text.valid) || (text.dirty && !text.valid)"
+        <div *ngIf="text.dirty && !text.valid"
              class="help-block">Text is required</div>
       </div>
+      <div class="clearfix"></div>
     </div>
-  
     <div class="form-group">
       <label class="control-label col-lg-2">Status<span class="star">*</span></label>
       <div class="controls col-lg-10">
         <select class="form-control" id="status" name="status"
+                [disabled]="!id"
                 [(ngModel)]="todo.status" #text="ngModel" >
           <option>new</option>
           <option>done</option>
         </select>
       </div>
-      
+      <div class="clearfix"></div>
     </div>
+    
     
     <div class="form-group">
       <button [disabled]="loading" class="btn btn-primary">Add</button>
     </div>
-    <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+    <ngb-alert *ngIf="errors" type='danger' [dismissible]="false">
+      {{errors}}
+    </ngb-alert>
   </form>
+  
 </div>

@@ -1,9 +1,32 @@
 {
   "users": [
-    { "id": 1, "login": "test", "pas": "test", "token": "jkfhdskjfhasdjkfhask" }
+    {
+      "id": 1,
+      "login": "test",
+      "pas": "test",
+      "token": "jkfhdskjfhasdjkfhask"
+    }
   ],
   "todos": [
-    { "id": 1, "text": "some todo1", "status":"new" },
-    { "id": 2, "text": "some todo2", "status":"done" }
+    {
+      "id": 1,
+      "text": "some todo1",
+      "status": "new"
+    },
+    {
+      "id": 2,
+      "text": "some todo2",
+      "status": "done"
+    },
+    {
+      "text": "11111",
+      "status": "new",
+      "id": 3
+    },
+    {
+      "id": 4,
+      "text": "22222",
+      "status": "new"
+    }
   ]
 }

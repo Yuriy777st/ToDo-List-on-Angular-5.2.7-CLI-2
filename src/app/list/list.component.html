@@ -19,20 +19,20 @@
         <th [class.active]="order === 'id'"
             (click)="setOrder('id')">
           Id
-          <span [hidden]="reverse">▼</span>
-          <span [hidden]="!reverse">▲</span>
+          <span [hidden]="(order != 'id') || reverse">▼</span>
+          <span [hidden]="(order != 'id') || !reverse">▲</span>
         </th>
         <th [class.active]="order === 'text'"
             (click)="setOrder('text')">
           Text
-          <span [hidden]="reverse">▼</span>
-          <span [hidden]="!reverse">▲</span>
+          <span [hidden]="(order != 'text') || reverse">▼</span>
+          <span [hidden]="(order != 'text') || !reverse">▲</span>
         </th>
         <th [class.active]="order === 'status'"
             (click)="setOrder('status')">
           Status
-          <span [hidden]="reverse">▼</span>
-          <span [hidden]="!reverse">▲</span>
+          <span [hidden]="(order != 'status') || reverse">▼</span>
+          <span [hidden]="(order != 'status') || !reverse">▲</span>
         </th>
         <th >
           Action

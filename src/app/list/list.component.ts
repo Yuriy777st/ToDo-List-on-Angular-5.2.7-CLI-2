@@ -11,12 +11,13 @@ import { Todo } from '../todo';
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
-    order: string = 'status';
-    reverse: boolean = false;
+    order = 'status';
+    reverse = false;
     collection: any[];
     sortedCollection: any[];
     todos: Todo[] = [];
     loading = false;
+    errors: any;
 
   constructor(
       private router: Router,
@@ -30,13 +31,22 @@ export class ListComponent implements OnInit {
 
   ngOnInit() {
       this.loading = true;
-      this._service.getList().subscribe(res => {
-          this.loading = false;
+      // this._service.getList().subscribe(res => {
+      //     this.loading = false;
+      //     this.todos = res as Todo[];
+      // }, err => {
+      //     console.log(err);
+      //     this.loading = false;
+      // });
+      this.errors = null;
+      this._service.getList().then(res => {
           this.todos = res as Todo[];
-      }, err => {
-          console.log(err);
           this.loading = false;
-      });
+      })
+          .catch(err => {
+              this.loading = false;
+              this.errors = err.error;
+          });
   }
 
     logOut() {
@@ -52,7 +62,6 @@ export class ListComponent implements OnInit {
         this.order = value;
     }
     add() {
-        console.log('Add');
         this.router.navigate(['/create']);
     }
 
