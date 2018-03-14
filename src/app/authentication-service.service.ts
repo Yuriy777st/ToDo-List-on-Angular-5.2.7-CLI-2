@@ -32,15 +32,15 @@ export class AuthenticationService {
     }
 
     registration(username: string, password: string): Observable<boolean> {
-        // let options = {
-        //     headers: AuthenticationService.getAdditionalHeaders()
-        // };
+        let options = {
+            headers: AuthenticationService.getAdditionalHeaders()
+        };
 
         return this.http.post('http://localhost:3000/users', JSON.stringify({
             login:  username,
             pas: password,
             token: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
-        })).map((response: any) => {
+        }),options).map((response: any) => {
                 return true;
             });
     }

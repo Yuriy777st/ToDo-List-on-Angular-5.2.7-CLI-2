@@ -5,6 +5,12 @@
       "login": "test",
       "pas": "test",
       "token": "jkfhdskjfhasdjkfhask"
+    },
+    {
+      "login": "111",
+      "pas": "111",
+      "token": "26m4u60wjp98cyt5tfwkc5",
+      "id": 3
     }
   ],
   "todos": [
@@ -32,6 +38,11 @@
       "id": 5,
       "text": "rrrrrr",
       "status": "new"
+    },
+    {
+      "id": 6,
+      "text": "new test",
+      "status": "done"
     }
   ]
 }

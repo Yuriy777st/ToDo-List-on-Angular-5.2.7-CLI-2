@@ -25,6 +25,7 @@ export class EditComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.id = parseInt(params['id'], 10);
       if (this.id) {
+        this.loading = true;
         this.greetingsText = 'Edit item';
           this._service.getById(this.id)
               .then((res) => {
